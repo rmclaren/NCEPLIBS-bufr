@@ -51,6 +51,8 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} mv bufr/testfiles testfiles
   COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} rm -rf bufr)
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/testrun)
+
 list(APPEND test_IN_srcs
   test_IN_1.f
   test_IN_2.f
@@ -79,10 +81,18 @@ list(APPEND test_OUT_5_srcs
   test_OUT_5.f
 )
 
-# Install test_wrapper.sh
-execute_process( COMMAND ${CMAKE_COMMAND} -E copy
-  ${CMAKE_CURRENT_SOURCE_DIR}/test_wrapper.sh
-  ${CMAKE_BINARY_DIR}/bin/test_wrapper.sh )
+# Install testing scripts
+list(APPEND test_scripts
+  test_wrapper.sh
+  test_gettab.sh
+  test_split_by_subset.sh
+)
+
+foreach(test_script ${test_scripts})
+  execute_process( COMMAND ${CMAKE_COMMAND} -E copy
+    ${CMAKE_CURRENT_SOURCE_DIR}/test_scripts/${test_script}
+    ${CMAKE_BINARY_DIR}/bin/${test_script} )
+endforeach()
 
 function(bufr_add_test TESTNAME EXENAME)
   add_test(NAME ${TESTNAME}
@@ -162,3 +172,15 @@ foreach(test_src IN ITEMS ${test_OUT_3_srcs} ${test_OUT_4_srcs})
     endif()
   endforeach()
 endforeach()
+
+# Test utilities
+# Test gettab.x utility
+add_test(NAME test_gettab
+  COMMAND ${CMAKE_BINARY_DIR}/bin/test_gettab.sh "${CMAKE_BINARY_DIR}/utils/gettab.x testfiles/data/1bamua" "testrun/1bamua.table.run" "testfiles/testoutput/1bamua.table.out"
+  )
+
+# Test split_by_subset.x utility
+add_test(NAME test_split_by_subset
+  COMMAND ${CMAKE_BINARY_DIR}/bin/test_split_by_subset.sh "${CMAKE_BINARY_DIR}/utils/split_by_subset.x testfiles/data/satwndbufr" "testfiles/testoutput/satwndbufr_split"
+  )
+
