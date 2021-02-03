@@ -12,6 +12,7 @@ module bufr_c_interface_mod
   public :: ufbint_c
   public :: ufbrep_c
   public :: dxdump_c
+  public :: mtinfo_c
 
 contains
 
@@ -133,5 +134,14 @@ subroutine dxdump_c(bufr_unit, table_unit) bind(C, name='dxdump_f')
 
   call dxdump(bufr_unit, table_unit)
 end subroutine dxdump_c
+
+
+subroutine mtinfo_c(path, file_unit_1, file_unit_2) bind(C, name='mtinfo_f')
+  character(kind=c_char, len=1) :: filepath
+  integer(c_int), value, intent(in) :: file_unit_1
+  integer(c_int), value, intent(in) :: file_unit_2
+
+  call mtinfo(c_f_string(path), file_unit_1, file_unit_2)
+end subroutine mtinfo_c
 
 end module bufr_c_interface_mod
