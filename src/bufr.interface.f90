@@ -128,6 +128,19 @@ subroutine ufbrep_c(bufr_unit, c_data, dim_1, dim_2, iret, table_b_mnemonic) bin
 end subroutine ufbrep_c
 
 
+subroutine ufbseq_c(bufr_unit, c_data, dim_1, dim_2, iret, sequence) bind(C, name='ufbseq_f')
+  integer(c_int), value, intent(in) :: bufr_unit
+  type(c_ptr), intent(inout) :: c_data
+  integer(c_int), value, intent(in) :: dim_1, dim_2
+  integer(c_int), intent(out) :: iret
+  character(kind=c_char, len=1), intent(in) :: sequence
+  real, pointer :: f_data
+
+  call c_f_pointer(c_data, f_data)
+  call ufbseq(bufr_unit, f_data, dim_1, dim_2, iret, c_f_string(sequence))
+end subroutine ufbseq_c
+
+
 subroutine dxdump_c(bufr_unit, table_unit) bind(C, name='dxdump_f')
   integer(c_int), value, intent(in) :: bufr_unit
   integer(c_int), value, intent(in) :: table_unit
