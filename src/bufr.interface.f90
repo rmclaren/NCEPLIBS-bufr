@@ -78,6 +78,11 @@ subroutine closbf_c(bufr_unit) bind(C, name='closbf_f')
 end subroutine closbf_c
 
 
+subroutine exitbufr_c() bind(C, name='exitbufr_f')
+  call exitbufr()
+end subroutine exitbufr_c
+
+
 function ireadmg_c(bufr_unit, c_subset, iddate, subset_str_len) result(ires) bind(C, name='ireadmg_f')
   integer(c_int), value, intent(in) :: bufr_unit
   character(kind=c_char, len=1), intent(inout) :: c_subset(*)
