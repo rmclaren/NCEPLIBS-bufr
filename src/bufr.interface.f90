@@ -150,7 +150,7 @@ end subroutine dxdump_c
 
 
 subroutine mtinfo_c(path, file_unit_1, file_unit_2) bind(C, name='mtinfo_f')
-  character(kind=c_char, len=1) :: filepath
+  character(kind=c_char, len=1) :: path
   integer(c_int), value, intent(in) :: file_unit_1
   integer(c_int), value, intent(in) :: file_unit_2
 
