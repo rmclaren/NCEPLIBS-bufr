@@ -17,6 +17,16 @@ foreach(_src ${_utils_srcs})
   list(APPEND _utils_execs ${_exec})
 endforeach()
 
+list(APPEND _debuf_srcs
+  debufr.f
+  debufr.c
+  )
+
+add_executable(debufr.x ${_debuf_srcs})
+add_dependencies(debufr.x bufr::bufr_4_DA)
+target_link_libraries(debufr.x PRIVATE bufr::bufr_4_DA)
+list(APPEND _utils_execs debufr.x )
+
 install(TARGETS ${_utils_execs}
         RUNTIME
         DESTINATION bin
