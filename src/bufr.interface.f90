@@ -89,7 +89,6 @@ function ireadmg_c(bufr_unit, c_subset, iddate, subset_str_len) result(ires) bin
   integer(c_int), intent(out) :: iddate
   integer(c_int), value, intent(in) :: subset_str_len
   integer(c_int) :: ires
-  integer(c_int) :: subset_len
   character(len=25) :: f_subset
   integer :: ireadmg
 
