@@ -179,7 +179,7 @@ int main( int argc, char *argv[ ] ) {
     char forcemt = 'N';
     char cfms = 'Y';
     char io = 'r';
-    char tbldir[MXFLEN] = "/home/rmclaren/Work/ioda-bundle/ioda_converters/test/testinput/bufr_tables";
+    char tbldir[MXFLEN] = "/home/rmclaren/Work/bufr_tables";
     char tblfil[MXFLEN];
     char outfile[MXFLEN];
     char prmstg[MXFLEN] = "NULLPSTG";

@@ -27,6 +27,17 @@ add_dependencies(debufr.x bufr::bufr_4_DA)
 target_link_libraries(debufr.x PRIVATE bufr::bufr_4_DA)
 list(APPEND _utils_execs debufr.x )
 
+
+list(APPEND _readtbld_srcs
+  readtbld.f90
+  )
+
+add_executable(readtbld.x ${_readtbld_srcs})
+add_dependencies(readtbld.x bufr::bufr_4_DA)
+target_link_libraries(readtbld.x PRIVATE bufr::bufr_4_DA)
+list(APPEND _utils_execs readtbld.x )
+
+
 install(TARGETS ${_utils_execs}
         RUNTIME
         DESTINATION bin
