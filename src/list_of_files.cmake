@@ -304,9 +304,10 @@ set(fortran_src
   openbf.F
   pkvs01.F
   wrdlen.F
+  bufr.interface.f90
   fortran_open.f90
   fortran_close.f90
-  bufr.interface.f90)
+  table_d_info.f90)
 
 set(f_hdr
   ${CMAKE_CURRENT_BINARY_DIR}/bufrlib.inc)
