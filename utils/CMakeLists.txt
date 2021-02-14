@@ -6,6 +6,7 @@ list(APPEND _utils_srcs
   sinv.f
   gettab.f90
   split_by_subset.f90
+  readtbld.f90
 )
 
 foreach(_src ${_utils_srcs})
